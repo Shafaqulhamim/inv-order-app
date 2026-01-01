@@ -141,7 +141,7 @@ export default function AddItemForm() {
                                 onChange={(e) => update("sku", e.target.value)}
                                 className="w-full rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black px-3 py-2 text-sm
                            focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                                placeholder="SKU-004"
+                                placeholder="XXX-123"
                                 required
                             />
                         </div>
@@ -156,7 +156,7 @@ export default function AddItemForm() {
                                 onChange={(e) => update("name", e.target.value)}
                                 className="w-full rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black px-3 py-2 text-sm
                            focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                                placeholder="Coffee Beans"
+                                placeholder="Name of the item"
                                 required
                             />
                         </div>
@@ -186,7 +186,7 @@ export default function AddItemForm() {
                                 onChange={(e) => update("cost", e.target.value)}
                                 className="w-full rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black px-3 py-2 text-sm
                            focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                                placeholder="1.30"
+                                placeholder="0.00"
                                 inputMode="decimal"
                                 required
                             />
