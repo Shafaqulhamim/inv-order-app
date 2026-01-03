@@ -2,6 +2,7 @@ import { pool } from "@/lib/db";
 import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import AddItemForm from "./AddItemForm";
+import DeleteItemButton from "./DeleteItemButton";
 
 export default async function ManagerItemsPage() {
     // 1) Auth check (layout already checks login, but we need role)
@@ -50,6 +51,7 @@ export default async function ManagerItemsPage() {
                             <th className="px-4 py-3 text-right font-medium">Cost</th>
                             <th className="px-4 py-3 text-right font-medium">In Stock</th>
                             <th className="px-4 py-3 text-center font-medium">Active</th>
+                            <th className="px-4 py-3 text-center font-medium">Actions</th>
                         </tr>
                     </thead>
 
@@ -103,6 +105,9 @@ export default async function ManagerItemsPage() {
                                             Inactive
                                         </span>
                                     )}
+                                </td>
+                                <td className="px-4 py-3 text-center">
+                                    <DeleteItemButton id={item.id} />
                                 </td>
                             </tr>
                         ))}

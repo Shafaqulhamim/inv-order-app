@@ -5,9 +5,14 @@ import { z } from "zod";
 
 const IdSchema = z.string().uuid("Invalid item id");
 
-type Params = { params: { id: string } };
+async function getIdFromContext(context: any): Promise<string> {
+    const p = context?.params;
+    const params = typeof p?.then === "function" ? await p : p; // Promise or plain object
+    return params?.id;
+}
 
-export async function DELETE(_req: Request, { params }: Params) {
+
+export async function DELETE(_req: Request, context: any) {
     // 1) Authentication
     const user = await getSession();
     if (!user) {
@@ -16,15 +21,15 @@ export async function DELETE(_req: Request, { params }: Params) {
     if (user.role !== "MANAGER") {
         return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
-    const parsedId = IdSchema.safeParse(params.id);
+
+    const id = await getIdFromContext(context);
+    const parsedId = IdSchema.safeParse(id);
     if (!parsedId.success) {
         return NextResponse.json(
             { error: parsedId.error.issues[0]?.message ?? "Invalid id" },
             { status: 400 }
         );
     }
-
-    const id = parsedId.data;
     try {
         // 4) Delete and return the deleted row (helps UI confirm)
         const { rows } = await pool.query(
